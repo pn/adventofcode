@@ -4,7 +4,6 @@ line = f.readline()
 b = [int(x) for x in line.split(',')]
 for noun in range(100):
     for verb in range(100):
-        #print(f'{noun} {verb}')
         a = b.copy()
         a[1] = noun
         a[2] = verb

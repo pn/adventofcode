@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 result = 0
 f = open('input3.txt')
-w1i = f.readline()
-w2i = f.readline()
-w1 = [x.strip() for x in w1i.split(',')]
-w2 = [x.strip() for x in w2i.split(',')]
-a, b = [], []
+w1 = [x.strip() for x in f.readline().split(',')]
+w2 = [x.strip() for x in f.readline().split(',')]
 a1 = [ [ 0 for y in range( 1000 ) ] for x in range( 1000 ) ]
 a2 = [ [ 0 for y in range( 1000 ) ] for x in range( 1000 ) ]
 wz1 = []
@@ -44,7 +41,6 @@ p2 = points(wz2)
 s1 = set(p1.keys())
 s2 = set(p2.keys())
 comm = s1.intersection(s2)
-cross = []
 
 m = 1000000000
 for c in comm:

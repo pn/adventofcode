@@ -1,13 +1,8 @@
 #!/usr/bin/env python3
 result = 0
 f = open('input3.txt')
-w1i = f.readline()
-w2i = f.readline()
-w1 = [x.strip() for x in w1i.split(',')]
-w2 = [x.strip() for x in w2i.split(',')]
-a, b = [], []
-a1 = [ [ 0 for y in range( 1000 ) ] for x in range( 1000 ) ]
-a2 = [ [ 0 for y in range( 1000 ) ] for x in range( 1000 ) ]
+w1 = [x.strip() for x in f.readline().split(',')]
+w2 = [x.strip() for x in f.readline().split(',')]
 wz1 = []
 wz2 = []
 for w in w1:
@@ -39,8 +34,6 @@ def points(a):
 s1 = set(points(wz1))
 s2 = set(points(wz2))
 comm = s1.intersection(s2)
-cross = []
-
 
 # count crossing
 m = 1000000000
@@ -49,5 +42,4 @@ for c in comm:
     if z < m:
         m = z
         
-print(comm)
 print(m)
