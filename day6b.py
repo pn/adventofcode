@@ -21,12 +21,12 @@ def getAll(o):
 osan = getAll('SAN')
 oyou = getAll('YOU')
 D = None
-for o in osan:
-    for oy in oyou:
-        if oy == o:
-            D = o
-            break
+for s in osan:
+    for y in oyou:
+        if y == s:
+            D = s
+            break # breaks two loops in this case
     else:
-        continue
-    break
+        continue # Continue if the inner loop wasn't broken.
+    break # Inner loop was broken, break the outer.
 print(getDist('SAN') + getDist('YOU') - 2 * getDist(D) - 2)
