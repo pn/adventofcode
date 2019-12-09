@@ -62,5 +62,5 @@ class State:
         return self
 
 
-print(f'part 1: {State(program, 1).run().output[-1]}')
-print(f'part 2: {State(program, 2).run().output[-1]}')
+for part in [1, 2]:
+    print(f'part {part}: {State(program, part).run().output[-1]}')
