@@ -63,17 +63,36 @@ class State:
         return False
 
 
-state = State(program, 0)
-colors = {}
-pos = (0, 0)
-direction = 0
-directions = [(0, -1), (1, 0), (0, 1), (-1, 0)]
-while state.run():
-    color = state.output.pop(0)
-    colors[pos] = color
-    state.run()
-    direction = (direction + (1 if state.output.pop(0) == 1 else len(directions) - 1)) % len(directions)
-    pos = (pos[0] + directions[direction][0], pos[1] + directions[direction][1])
-    state.input.append(colors.get(pos, 0))
+def get_colors(starting_color):
+    state = State(program.copy(), starting_color)
+    colors = {}
+    pos = (0, 0)
+    direction = 0
+    directions = [(0, -1), (1, 0), (0, 1), (-1, 0)]
+    while state.run():
+        color = state.output.pop(0)
+        colors[pos] = color
+        state.run()
+        direction = (direction + (1 if state.output.pop(0) == 1 else len(directions) - 1)) % len(directions)
+        pos = (pos[0] + directions[direction][0], pos[1] + directions[direction][1])
+        state.input.append(colors.get(pos, 0))
+    return colors
 
-print(len(colors))
+
+def render_colors(colors):
+    xs = list(map(lambda x: x[0], colors.keys()))
+    ys = list(map(lambda x: x[1], colors.keys()))
+    min_x = min(xs)
+    min_y = min(ys)
+    max_x = max(xs)
+    max_y = max(ys)
+    print(min_x, min_y, max_x, max_y)
+    for j in range(max_y - min_y + 1):
+        row = ''
+        for i in range(max_x - min_x + 1):
+            row = row + ('*' if colors.get((i, j), 0) else ' ')
+        print(row)
+
+
+print(len(get_colors(0)))
+render_colors(get_colors(1))
