@@ -64,20 +64,14 @@ class State:
         return None
 
 
-def play(program, screen):
-    s = State(program)
+def play(s, scr):
     while True:
         x = s.run()
-        if x is None:
-            return
+        if x is None: return
         y = s.run()
         t = s.run()
-        screen[(x, y)] = t
+        scr[(x, y)] = t
 
 
-play(program, screen)
-count = 0
-for tile in screen.values():
-    if tile == 2:
-        count += 1
-print(count)
+play(State(program), screen)
+print(list(screen.values()).count(2))
