@@ -1,5 +1,4 @@
-trees = 0
-position = 0
+trees = position = 0
 for line in open('input3.txt').read().split('\n'):
     if line[position] == '#':
         trees += 1
