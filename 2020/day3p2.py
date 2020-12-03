@@ -31,3 +31,15 @@ result = 1
 for slope in slopes:
     result *= [l[(i // slope[1] * slope[0]) % len(l)] for i, l in enumerate(lines) if (i % slope[1]) == 0].count('#')
 print(result)
+
+# alternative solution
+
+import math
+slopes = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]
+lines = open('input3.txt').read().split('\n')
+print(math.prod([[l[(i // slope[1] * slope[0]) % len(l)] for i, l in enumerate(lines) if (i % slope[1]) == 0].count('#') for slope in slopes]))
+
+# alternative solution
+
+import math
+print(math.prod([[l[(i // slope[1] * slope[0]) % len(l)] for i, l in enumerate(open('input3.txt').read().split('\n')) if (i % slope[1]) == 0].count('#') for slope in [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]]))
