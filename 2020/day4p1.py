@@ -1,21 +1,9 @@
-lines = open('input4.txt').read().splitlines()
-fields = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
-passports = []
-passport = {}
-for line in lines:
+passports = [[]]
+for line in open('input4.txt').read().splitlines():
     if not line:
-        if passport:
-            passports.append(passport)
-            passport = {}
+        passports.append([])
         continue
-    line_entries = line.split(' ')
-    for entry in line_entries:
-        key, value = entry.split(':')
-        passport[key] = value
-
-passports.append(passport)
-valid = 0
-for passport in passports:
-    if set(set(fields)).issubset(passport.keys()):
-        valid += 1
-print(valid)
+    for entry in line.split(' '):
+        field, _ = entry.split(':')
+        passports[-1].append(field)
+print(sum(1 for valid_fields in passports if {'byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'}.issubset(valid_fields)))
