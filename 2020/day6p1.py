@@ -1,19 +1,10 @@
-from string import ascii_lowercase
+from functools import reduce
 
 groups = [[]]
 for line in open('input6.txt').read().splitlines():
     if not line:
         groups.append([])
         continue
-    groups[-1].append(line)
+    groups[-1].append(set(list(line)))
 
-total = 0
-for group in groups:
-    i = 0
-    answers = ''.join(group)
-    for letter in ascii_lowercase:
-        if letter in answers:
-            i += 1
-    total += i
-
-print(total)
+print(sum(len(reduce(lambda a, b: a.union(b), group)) for group in groups))
