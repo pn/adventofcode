@@ -9,11 +9,7 @@ for line in open('input7.txt').read().splitlines():
         bags[containing][contained] = int(item[0])
 
 def count_bags(containing):
-    s = 0
-    for contained in bags[containing]:
-        s += bags[containing][contained] * (1 + count_bags(contained))
-    return s
-
+    return sum(bags[containing][contained] * (1 + count_bags(contained)) for contained in bags[containing])
 print(count_bags('shiny gold'))
 
 

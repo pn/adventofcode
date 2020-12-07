@@ -1,19 +1,18 @@
 bags = {}
 for line in open('input7.txt').read().splitlines():
     containing, _list = line.split(' bags contain ', 2)
-    bags[containing] = {}
     if _list.endswith('no other bags.'):
         continue
     for item in _list.split(', '):
         contained = ' '.join(item.split(' ')[1:-1])
-        bags[containing][contained] = int(item[0])
+        bags[contained] = bags.get(contained, {})
+        bags[contained][containing] = True
 
-l = ['shiny gold']
-for j in range(len(bags)):
-    for bag in bags:
-        for i in l:
-            contains = bags[bag].get(i, '')
-            if contains and bags[i] not in l:
-                if bag not in l:
-                    l.append(bag)
-print(len(set(l)) - 1)
+all_containing = []
+def find_containing(name):
+    for bag in bags.get(name, []):
+        if bag not in all_containing:
+            all_containing.append(bag)
+            find_containing(bag)
+find_containing('shiny gold')
+print(len(all_containing))
